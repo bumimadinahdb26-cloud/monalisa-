@@ -697,7 +697,7 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 // ============================================================
 // KONFIGURASI GOOGLE SPREADSHEET
 // ============================================================
-var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwyjjroUmxSse6datFzzLb4LP1HbwD2nAEFMTsGSBJPNeTR382Q7tJuuhXr3bQVT_Q/exec';
+var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzsNs53jKfX3MIwFHW5wSOxwO4VAdYnRm_pkvYThfgnZCP_B46kIgtoZxr9XP1sxWg-/exec';
 
 // Data perawat
 var NURSES = [
@@ -737,6 +737,39 @@ function sendToSheet(sheetName, rowData){
         console.error('[Monalisa+] Gagal kirim ke spreadsheet:', e);
         return false;
     });
+}
+
+// ---- REGISTER KE BACKEND (spreadsheet) ----
+function registerToBackend(userData, passwordHash) {
+    return fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({
+            action: 'register',
+            data: {
+                nama: userData.nama,
+                rm: userData.rm,
+                usia: userData.usia,
+                jk: userData.jk,
+                alamat: userData.alamat,
+                email: userData.email,
+                passwordHash: passwordHash
+            }
+        })
+    }).then(function(r) { return r.json(); });
+}
+
+// ---- LOGIN KE BACKEND (spreadsheet) ----
+function loginToBackend(email, passwordHash) {
+    return fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({
+            action: 'login',
+            email: email,
+            passwordHash: passwordHash
+        })
+    }).then(function(r) { return r.json(); });
 }
 
 // ---- DATA APLIKASI ----
@@ -792,36 +825,103 @@ function goToStep(step){
 
  $('btnNextStep').addEventListener('click',function(){ if(!validateStep1()){toast('Lengkapi semua data terlebih dahulu','error');return;} goToStep(2); });
  $('btnBackStep').addEventListener('click',function(){ goToStep(1); });
+ 
  $('btnRegister').addEventListener('click',function(){
     if(!validateStep2()){toast('Periksa kembali data akun Anda','error');return;}
     var btn=this; btn.classList.add('loading'); btn.disabled=true;
-    setTimeout(function(){
-        var email=$('inEmail').value.trim(), pw=$('inPassword').value, now=new Date();
-        appData.user={nama:tempPatientData.nama,rm:tempPatientData.rm,usia:tempPatientData.usia,jk:tempPatientData.jk,alamat:tempPatientData.alamat,email:email,registeredAt:now.toISOString()};
-        appData.passwordHash=simpleHash(pw); appData.stats.days=1; appData.stats.sessions=0; appData.isLoggedIn = true; saveData();
-        sendToSheet('Pendaftaran',[now.toISOString(),tempPatientData.nama,tempPatientData.rm,tempPatientData.usia,tempPatientData.jk,tempPatientData.alamat,email,formatDate(now)]);
+    var email=$('inEmail').value.trim(), pw=$('inPassword').value, now=new Date();
+    var pwHash = simpleHash(pw);
+
+    registerToBackend({
+        nama: tempPatientData.nama,
+        rm: tempPatientData.rm,
+        usia: tempPatientData.usia,
+        jk: tempPatientData.jk,
+        alamat: tempPatientData.alamat,
+        email: email
+    }, pwHash).then(function(resp){
         btn.classList.remove('loading'); btn.disabled=false;
+        if(resp.status === 'ok'){
+            appData.user = resp.user;
+            appData.passwordHash = pwHash;
+            appData.stats.days = 1;
+            appData.stats.sessions = 0;
+            appData.isLoggedIn = true;
+            saveData();
+            // Kirim juga ke sheet Pendaftaran untuk log
+            sendToSheet('Pendaftaran',[now.toISOString(),tempPatientData.nama,tempPatientData.rm,tempPatientData.usia,tempPatientData.jk,tempPatientData.alamat,email,formatDate(now)]);
+            $('loginOverlay').classList.add('hidden');
+            $('mainDashboard').style.display='flex';
+            initDashboard();
+            toast('Pendaftaran berhasil! Selamat datang, '+appData.user.nama,'success');
+        } else {
+            toast(resp.message || 'Gagal mendaftar','error');
+        }
+    }).catch(function(err){
+        btn.classList.remove('loading'); btn.disabled=false;
+        // Fallback: simpan lokal saja jika server tidak bisa diakses
+        appData.user={nama:tempPatientData.nama,rm:tempPatientData.rm,usia:tempPatientData.usia,jk:tempPatientData.jk,alamat:tempPatientData.alamat,email:email,registeredAt:now.toISOString()};
+        appData.passwordHash=pwHash; appData.stats.days=1; appData.stats.sessions=0; appData.isLoggedIn=true; saveData();
         $('loginOverlay').classList.add('hidden'); $('mainDashboard').style.display='flex'; initDashboard();
-        toast('Pendaftaran berhasil! Selamat datang, '+appData.user.nama,'success');
-    },1200);
+        toast('Pendaftaran berhasil (mode offline lokal)!','success');
+    });
 });
 
  $('btnLogin').addEventListener('click',function(){
     var email=$('loginEmail').value.trim(), pw=$('loginPassword').value, valid=true;
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){setFieldError('grpLoginEmail');valid=false}else clearFieldError('grpLoginEmail');
     if(!valid){toast('Masukkan email yang valid','error');return;}
-    if(!appData.user||appData.user.email!==email){setFieldError('grpLoginEmail');toast('Email tidak terdaftar','error');return;}
-    if(appData.passwordHash!==simpleHash(pw)){setFieldError('grpLoginPw');toast('Password salah','error');return;}
+
     var btn=this; btn.classList.add('loading'); btn.disabled=true;
-    setTimeout(function(){ 
-        appData.isLoggedIn = true; saveData(); 
-        btn.classList.remove('loading'); btn.disabled=false; 
-        $('loginOverlay').classList.add('hidden'); 
-        $('mainDashboard').style.display='flex'; 
-        initDashboard(); 
-        toast('Selamat datang kembali, '+appData.user.nama+'!','success'); 
-    },800);
+    var pwHash = simpleHash(pw);
+
+    loginToBackend(email, pwHash).then(function(resp){
+        btn.classList.remove('loading'); btn.disabled=false;
+        if(resp.status === 'ok'){
+            // Login berhasil - simpan data user dari server ke localStorage
+            appData.user = resp.user;
+            appData.passwordHash = pwHash;
+            appData.isLoggedIn = true;
+            if(!appData.stats) appData.stats = {sessions:0, days:1};
+            saveData();
+            $('loginOverlay').classList.add('hidden');
+            $('mainDashboard').style.display='flex';
+            initDashboard();
+            toast('Selamat datang kembali, '+appData.user.nama+'!','success');
+        } else {
+            // Fallback: cek localStorage (untuk akun lama yang belum terdaftar di server)
+            if(appData.user && appData.user.email === email && appData.passwordHash === pwHash){
+                appData.isLoggedIn = true;
+                saveData();
+                $('loginOverlay').classList.add('hidden');
+                $('mainDashboard').style.display='flex';
+                initDashboard();
+                toast('Selamat datang kembali, '+appData.user.nama+'!','success');
+            } else {
+                if(resp.message && resp.message.indexOf('Password') !== -1){
+                    setFieldError('grpLoginPw');
+                } else {
+                    setFieldError('grpLoginEmail');
+                }
+                toast(resp.message || 'Login gagal','error');
+            }
+        }
+    }).catch(function(err){
+        btn.classList.remove('loading'); btn.disabled=false;
+        // Fallback: cek localStorage jika server tidak bisa diakses
+        if(appData.user && appData.user.email === email && appData.passwordHash === pwHash){
+            appData.isLoggedIn = true;
+            saveData();
+            $('loginOverlay').classList.add('hidden');
+            $('mainDashboard').style.display='flex';
+            initDashboard();
+            toast('Selamat datang kembali, '+appData.user.nama+'!','success');
+        } else {
+            toast('Gagal terhubung ke server. Periksa koneksi internet Anda.','error');
+        }
+    });
 });
+ 
  $('loginPassword').addEventListener('keydown',function(e){if(e.key==='Enter')$('btnLogin').click();});
  $('loginEmail').addEventListener('keydown',function(e){if(e.key==='Enter')$('loginPassword').focus();});
  $('btnShowRegister').addEventListener('click',function(){$('loginView').style.display='none';$('registerView').style.display='block';setTimeout(function(){$('loginFormBody').style.minHeight=$('formStep1').scrollHeight+'px';},50);});
