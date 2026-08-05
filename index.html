@@ -9,9 +9,10 @@
 <style>
 :root{--bg-dark:#f3f4f6;--bg-darker:#e5e7eb;--bg-card:#ffffff;--bg-elevated:#f9fafb;--accent-red:#dc2626;--accent-red-dark:#991b1b;--accent-red-light:#fca5a5;--accent-purple:#7c3aed;--accent-purple-dark:#5b21b6;--accent-purple-light:#a78bfa;--text-cream:#1f2937;--text-white:#111827;--text-muted:#6b7280;--text-dark:#1e293b;--border-gold:rgba(124,58,237,0.3);--border-subtle:rgba(0,0,0,0.08);--accent-teal:#14b8a6;--accent-teal-light:#2dd4bf;--accent-teal-dark:#0d9488;--color-danger:#dc2626;--color-warning:#f59e0b;--color-success:#10b981;--accent-cyan:#06b6d4;--accent-cyan-light:#22d3ee;--accent-blue:#3b82f6;--accent-blue-dark:#1d4ed8}
 *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--bg-dark);min-height:100vh;overflow-x:hidden;color:var(--text-cream)}
+body{font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;color:var(--text-cream)}
 h1,h2,h3,h4{font-family:'Outfit',sans-serif}
-.bg-pattern{position:fixed;inset:0;background:radial-gradient(circle at 20% 50%,rgba(124,58,237,0.08) 0%,transparent 50%),radial-gradient(circle at 80% 50%,rgba(220,38,38,0.06) 0%,transparent 50%),linear-gradient(180deg,#f3f4f6 0%,#e5e7eb 100%);z-index:-2}
+/* Background Dashboard diganti ke dashboard.png */
+.bg-pattern{position:fixed;inset:0;background:url('dashboard.png') center/cover no-repeat fixed;z-index:-2}
 .noise-overlay{position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:0.02;z-index:-1;pointer-events:none}
 .main-container{max-width:1400px;margin:0 auto;padding:20px;min-height:100vh;display:flex;flex-direction:column;gap:16px}
 .header-area{display:flex;gap:16px;min-height:380px}
@@ -214,19 +215,19 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 .nurse-card:hover .nurse-arrow{transform:translateX(4px);color:#25d366}
 .login-overlay{ position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:url('banner-saya.png')center/cover no-repeat;transition:opacity .6s ease,visibility .6s ease}
 .login-overlay.hidden{opacity:0;visibility:hidden;pointer-events:none;z-index:-1}   
-.login-overlay::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(15,10,30,0.88) 0%,rgba(26,16,53,0.83) 30%,rgba(13,27,42,0.83) 70%,rgba(10,15,26,0.88) 100%);pointer-events:none}
-.login-card{position:relative;z-index:2;width:460px;max-width:92vw;background:rgba(255,255,255,0.06);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);border-radius:24px;overflow:hidden;box-shadow:0 25px 80px rgba(0,0,0,0.5),0 0 60px rgba(124,58,237,0.1)}
+/* Overlay gelap dihilangkan agar background asli terlihat */
+.login-card{position:relative;z-index:2;width:460px;max-width:92vw;background:rgba(255,255,255,0.15);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,0.2);border-radius:24px;overflow:hidden;box-shadow:0 25px 80px rgba(0,0,0,0.3)}
 .login-card-header{padding:28px 32px 0;text-align:center}
 .login-logo{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:6px;color:#fff;background:linear-gradient(135deg,#fff 0%,var(--accent-purple-light) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
-.login-logo-sub{font-size:.78rem;color:rgba(255,255,255,0.5);margin-top:4px;letter-spacing:2px;text-transform:uppercase}
+.login-logo-sub{font-size:.78rem;color:rgba(255,255,255,0.8);margin-top:4px;letter-spacing:2px;text-transform:uppercase}
 .step-indicator{display:flex;align-items:center;justify-content:center;gap:0;padding:24px 32px 0}
-.step-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;border:2px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.35);transition:all .4s;position:relative;z-index:2;background:rgba(0,0,0,0.3)}
+.step-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;border:2px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.6);transition:all .4s;position:relative;z-index:2;background:rgba(0,0,0,0.2)}
 .step-dot.active{border-color:var(--accent-purple);color:#fff;background:linear-gradient(135deg,var(--accent-purple),var(--accent-purple-dark));box-shadow:0 0 20px rgba(124,58,237,0.4)}
 .step-dot.done{border-color:var(--accent-teal);color:#fff;background:var(--accent-teal);box-shadow:0 0 15px rgba(20,184,166,0.3)}
-.step-line{width:60px;height:2px;background:rgba(255,255,255,0.1);transition:background .4s}
+.step-line{width:60px;height:2px;background:rgba(255,255,255,0.2);transition:background .4s}
 .step-line.done{background:var(--accent-teal)}
 .step-labels{display:flex;justify-content:space-between;padding:8px 44px 0}
-.step-label{font-size:.65rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;font-weight:600;transition:color .4s}
+.step-label{font-size:.65rem;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:1px;font-weight:600;transition:color .4s}
 .step-label.active{color:var(--accent-purple-light)}
 .step-label.done{color:var(--accent-teal)}
 .login-form-body{padding:0;position:relative}
@@ -234,13 +235,13 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 .form-step.active{opacity:1;visibility:visible;transform:translateX(0)}
 .form-step.exit-left{opacity:0;visibility:hidden;transform:translateX(-30px)}
 .form-step .step-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:#fff;letter-spacing:2px;margin-bottom:4px}
-.form-step .step-desc{font-size:.8rem;color:rgba(255,255,255,0.45);margin-bottom:20px;line-height:1.5}
+.form-step .step-desc{font-size:.8rem;color:rgba(255,255,255,0.7);margin-bottom:20px;line-height:1.5}
 .login-input-group{margin-bottom:14px}
-.login-input-group label{display:block;font-size:.68rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;font-weight:600}
-.login-input-group input,.login-input-group select{width:100%;padding:12px 16px;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.1);border-radius:12px;color:#fff;font-size:.88rem;font-family:'DM Sans',sans-serif;transition:all .25s;outline:none;-webkit-appearance:none;appearance:none}
-.login-input-group select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='rgba(255,255,255,0.5)' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
-.login-input-group input:focus,.login-input-group select:focus{border-color:var(--accent-purple);background:rgba(124,58,237,0.08);box-shadow:0 0 0 3px rgba(124,58,237,0.15)}
-.login-input-group input::placeholder{color:rgba(255,255,255,0.25)}
+.login-input-group label{display:block;font-size:.68rem;color:rgba(255,255,255,0.8);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;font-weight:600}
+.login-input-group input,.login-input-group select{width:100%;padding:12px 16px;background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.2);border-radius:12px;color:#fff;font-size:.88rem;font-family:'DM Sans',sans-serif;transition:all .25s;outline:none;-webkit-appearance:none;appearance:none}
+.login-input-group select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='rgba(255,255,255,0.7)' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+.login-input-group input:focus,.login-input-group select:focus{border-color:var(--accent-purple);background:rgba(124,58,237,0.15);box-shadow:0 0 0 3px rgba(124,58,237,0.15)}
+.login-input-group input::placeholder{color:rgba(255,255,255,0.4)}
 .login-input-group select option{background:#1a1035;color:#fff}
 .login-input-group .field-error{font-size:.68rem;color:#fca5a5;margin-top:4px;display:none}
 .login-input-group.error input,.login-input-group.error select{border-color:var(--accent-red);box-shadow:0 0 0 3px rgba(220,38,38,0.15)}
@@ -259,14 +260,14 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
 .password-toggle{position:relative}
 .password-toggle input{padding-right:44px!important}
-.password-toggle-btn{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,0.4);cursor:pointer;padding:4px;transition:color .2s;display:flex;align-items:center}
-.password-toggle-btn:hover{color:rgba(255,255,255,0.7)}
-.login-footer-note{font-size:.7rem;color:rgba(255,255,255,0.3);text-align:center;margin-top:16px;line-height:1.5}
-.data-summary{background:rgba(20,184,166,0.08);border:1px solid rgba(20,184,166,0.2);border-radius:12px;padding:12px 14px;margin-bottom:18px}
-.data-summary-title{font-size:.65rem;color:var(--accent-teal);text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-bottom:8px}
+.password-toggle-btn{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,0.6);cursor:pointer;padding:4px;transition:color .2s;display:flex;align-items:center}
+.password-toggle-btn:hover{color:rgba(255,255,255,0.9)}
+.login-footer-note{font-size:.7rem;color:rgba(255,255,255,0.6);text-align:center;margin-top:16px;line-height:1.5}
+.data-summary{background:rgba(20,184,166,0.15);border:1px solid rgba(20,184,166,0.3);border-radius:12px;padding:12px 14px;margin-bottom:18px}
+.data-summary-title{font-size:.65rem;color:var(--accent-teal-light);text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-bottom:8px}
 .data-summary-row{display:flex;justify-content:space-between;align-items:center;padding:3px 0;font-size:.75rem}
-.data-summary-row .ds-label{color:rgba(255,255,255,0.4)}
-.data-summary-row .ds-value{color:rgba(255,255,255,0.85);font-weight:600;max-width:200px;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.data-summary-row .ds-label{color:rgba(255,255,255,0.6)}
+.data-summary-row .ds-value{color:rgba(255,255,255,0.95);font-weight:600;max-width:200px;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .discussion-modal-content{width:95vw;max-width:600px;max-height:80vh;display:flex;flex-direction:column}
 .discussion-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;border-bottom:2px solid var(--border-subtle);padding-bottom:12px}
 .discussion-count{background:var(--accent-teal);color:#fff;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:600}
@@ -320,12 +321,12 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 </div>
 <div id="loginView" style="display:none;padding:32px">
 <div class="step-title" style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#fff;letter-spacing:2px;margin-bottom:4px">Masuk Kembali</div>
-<div class="step-desc" style="font-size:.8rem;color:rgba(255,255,255,0.45);margin-bottom:24px;line-height:1.5">Masukkan email dan password yang telah Anda buat saat pertama kali mendaftar.</div>
+<div class="step-desc" style="font-size:.8rem;color:rgba(255,255,255,0.7);margin-bottom:24px;line-height:1.5">Masukkan email dan password yang telah Anda buat saat pertama kali mendaftar.</div>
 <div class="login-input-group" id="grpLoginEmail"><label>Email</label><input type="email" id="loginEmail" placeholder="email@contoh.com" autocomplete="off"><div class="field-error">Masukkan email yang valid</div></div>
 <div class="login-input-group password-toggle" id="grpLoginPw"><label>Password</label><input type="password" id="loginPassword" placeholder="Masukkan password" autocomplete="off"><button type="button" class="password-toggle-btn" id="toggleLoginPw" aria-label="Tampilkan password"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><div class="field-error">Password salah</div></div>
 <button type="button" class="btn-submit-login primary" id="btnLogin"><span class="btn-text">Masuk</span><span class="btn-spinner"></span></button>
 <div class="login-footer-note">Lupa password? Hubungi petugas HD untuk mereset akun Anda.</div>
-<div style="text-align:center;margin-top:12px"><button type="button" id="btnShowRegister" style="background:none;border:none;color:rgba(255,255,255,0.4);font-size:.75rem;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:underline">Buat akun baru</button></div>
+<div style="text-align:center;margin-top:12px"><button type="button" id="btnShowRegister" style="background:none;border:none;color:rgba(255,255,255,0.6);font-size:.75rem;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:underline">Buat akun baru</button></div>
 </div>
 <div id="registerView">
 <div class="step-indicator"><div class="step-dot active" id="stepDot1">1</div><div class="step-line" id="stepLine"></div><div class="step-dot" id="stepDot2">2</div></div>
@@ -336,14 +337,14 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 <div class="step-desc">Lengkapi data diri Anda. Data ini akan tersimpan di perangkat dan spreadsheet monitoring.</div>
 <div class="login-input-group" id="grpNama"><label>Nama Lengkap</label><input type="text" id="inNama" placeholder="Masukkan nama lengkap..." maxlength="60" autocomplete="off"><div class="field-error">Nama wajib diisi (min. 3 karakter)</div></div>
 <div class="login-row">
-<div class="login-input-group" id="grpRM"><label>No. Rekam Medis</label><input type="text" id="inRM" placeholder="Contoh: RM-00123" maxlength="20" autocomplete="off"><div style="font-size:.62rem;color:rgba(255,255,255,0.35);margin-top:4px;font-style:italic">Kalau tidak tahu boleh dikosongi</div><div class="field-error">No. RM wajib diisi</div></div>
+<div class="login-input-group" id="grpRM"><label>No. Rekam Medis</label><input type="text" id="inRM" placeholder="Contoh: RM-00123" maxlength="20" autocomplete="off"><div style="font-size:.62rem;color:rgba(255,255,255,0.5);margin-top:4px;font-style:italic">Kalau tidak tahu boleh dikosongi</div><div class="field-error">No. RM wajib diisi</div></div>
 <div class="login-input-group" id="grpUsia"><label>Usia</label><input type="number" id="inUsia" placeholder="Tahun" min="1" max="120" autocomplete="off"><div class="field-error">Usia tidak valid</div></div>
 </div>
 <div class="login-input-group" id="grpJK"><label>Jenis Kelamin</label><select id="inJK"><option value="">-- Pilih --</option><option value="Laki-laki">Laki-laki</option><option value="Perempuan">Perempuan</option></select><div class="field-error">Pilih jenis kelamin</div></div>
 <div class="login-input-group" id="grpAlamat"><label>Alamat</label><input type="text" id="inAlamat" placeholder="Alamat tempat tinggal..." maxlength="150" autocomplete="off"><div class="field-error">Alamat wajib diisi</div></div>
 <button type="button" class="btn-submit-login primary" id="btnNextStep"><span class="btn-text">Lanjutkan ke Pembuatan Akun</span><span class="btn-spinner"></span></button>
 <div class="login-footer-note">Data tersimpan lokal di perangkat dan dikirim ke spreadsheet monitoring.</div>
-<div style="text-align:center;margin-top:10px"><button type="button" id="btnShowLogin" style="background:none;border:none;color:rgba(255,255,255,0.4);font-size:.72rem;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:underline">Sudah punya akun? Klik akun saya</button></div>
+<div style="text-align:center;margin-top:10px"><button type="button" id="btnShowLogin" style="background:none;border:none;color:rgba(255,255,255,0.6);font-size:.72rem;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:underline">Sudah punya akun? Klik akun saya</button></div>
 </div>
 <div class="form-step" id="formStep2">
 <div class="step-title">Buat Akun</div>
@@ -358,7 +359,7 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 <div class="login-input-group password-toggle" id="grpPassword"><label>Password</label><input type="password" id="inPassword" placeholder="Min. 6 karakter" maxlength="50" autocomplete="new-password"><button type="button" class="password-toggle-btn" id="togglePw1" aria-label="Tampilkan password"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><div class="field-error">Password min. 6 karakter</div></div>
 <div class="login-input-group password-toggle" id="grpConfirm"><label>Konfirmasi Password</label><input type="password" id="inConfirm" placeholder="Ulangi password" maxlength="50" autocomplete="new-password"><button type="button" class="password-toggle-btn" id="togglePw2" aria-label="Tampilkan password"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><div class="field-error">Password tidak cocok</div></div>
 <div style="display:flex;gap:10px;margin-top:8px">
-<button type="button" class="btn-submit-login" id="btnBackStep" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.6);box-shadow:none;flex:.35"><span class="btn-text">Kembali</span></button>
+<button type="button" class="btn-submit-login" id="btnBackStep" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8);box-shadow:none;flex:.35"><span class="btn-text">Kembali</span></button>
 <button type="button" class="btn-submit-login teal" id="btnRegister" style="flex:.65"><span class="btn-text">Daftar & Masuk</span><span class="btn-spinner"></span></button>
 </div>
 </div>
