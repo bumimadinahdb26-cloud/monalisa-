@@ -311,7 +311,6 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 <div class="bg-pattern"></div><div class="noise-overlay"></div>
 <div class="toast-container" id="toastContainer"></div>
 
-<!-- ===== LOGIN OVERLAY ===== -->
 <div class="login-overlay" id="loginOverlay">
 <div class="login-card">
 <div class="login-card-header">
@@ -319,7 +318,6 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 <div class="login-logo-sub">Monitoring AKSES VASKULER Hemodialisis</div>
 </div>
 
-<!-- VIEW LOGIN -->
 <div id="loginView" style="display:none;padding:32px">
 <div class="step-title" style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#fff;letter-spacing:2px;margin-bottom:4px">Masuk Kembali</div>
 <div class="step-desc" style="font-size:.8rem;color:rgba(255,255,255,0.7);margin-bottom:24px;line-height:1.5">Masuk dengan <strong style="color:#fff">Email</strong> / <strong style="color:#fff">No HP</strong> / <strong style="color:#fff">Nama</strong> dan password yang Anda buat saat mendaftar. Akun dapat dipakai di semua perangkat.</div>
@@ -339,7 +337,6 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 <div style="text-align:center;margin-top:12px"><button type="button" id="btnShowRegister" style="background:none;border:none;color:rgba(255,255,255,0.6);font-size:.75rem;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:underline">Buat akun baru</button></div>
 </div>
 
-<!-- VIEW REGISTER -->
 <div id="registerView">
 <div class="step-indicator"><div class="step-dot active" id="stepDot1">1</div><div class="step-line" id="stepLine"></div><div class="step-dot" id="stepDot2">2</div></div>
 <div class="step-labels"><span class="step-label active" id="stepLabel1">DATA PENGGUNA</span><span class="step-label" id="stepLabel2">Buat Akun</span></div>
@@ -382,7 +379,6 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 </div>
 </div>
 
-<!-- ===== MAIN DASHBOARD ===== -->
 <div class="main-container" id="mainDashboard" style="display:none">
 <div class="header-area">
 <div class="banner-section">
@@ -488,7 +484,6 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 </div>
 </div>
 
-<!-- MODAL: AV-SHUNT -->
 <div class="modal-overlay" id="modalAkses">
 <div class="modal-box">
 <button class="modal-close" id="closeAkses">&times;</button>
@@ -530,7 +525,6 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 </div>
 </div>
 
-<!-- MODAL: CVC -->
 <div class="modal-overlay" id="modalCVC">
 <div class="modal-box">
 <button class="modal-close" id="closeCVC">&times;</button>
@@ -578,7 +572,6 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 </div>
 </div>
 
-<!-- MODAL: CATATAN -->
 <div class="modal-overlay" id="modalCatatan">
 <div class="modal-box discussion-modal-content">
 <button class="modal-close" id="closeCatatan">&times;</button>
@@ -592,7 +585,6 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 </div>
 </div>
 
-<!-- MODAL: PERAWAT -->
 <div class="modal-overlay" id="modalPerawat">
 <div class="modal-box" style="width:440px;max-width:92vw">
 <button class="modal-close" id="closePerawat">&times;</button>
@@ -612,7 +604,6 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 </div>
 </div>
 
-<!-- MODAL: SKOR -->
 <div class="modal-overlay" id="modalSkor">
 <div class="modal-box">
 <button class="modal-close" id="closeSkor">&times;</button>
@@ -637,7 +628,6 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 </div>
 </div>
 
-<!-- MODAL: LITERATUR -->
 <div class="modal-overlay" id="modalLiteratur">
 <div class="modal-box">
 <button class="modal-close" id="closeLiteratur">&times;</button>
@@ -669,7 +659,6 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 </div>
 </div>
 
-<!-- MODAL: KONSULTASI -->
 <div class="modal-overlay" id="modalKonsultasi">
 <div class="modal-box">
 <button class="modal-close" id="closeKonsultasi">&times;</button>
@@ -679,7 +668,6 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 </div>
 </div>
 
-<!-- MODAL: DISKUSI -->
 <div class="modal-overlay" id="modalDiscussion">
 <div class="modal-box discussion-modal-content">
 <button class="modal-close" id="closeDiscussion">&times;</button>
@@ -692,7 +680,7 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 </div>
 
 <script>
-var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzsNs53jKfX3MIwFHW5wSOxwO4VAdYnRm_pkvYThfgnZCP_B46kIgtoZxr9XP1sxWg-/exec';
+var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxMrCneCPjWA2zEiYXA6E7q-YFJ0jersa2rTf-UEDMc0TOWEkt4yBfvh3bTeD5TJxmC/exec';
 var NURSES = [
     { name: 'Hesty', phone: '6282124700093', display: '0821-2470-0093' },
     { name: 'Erik',  phone: '6285732737585', display: '0857-3273-7585' }
@@ -724,7 +712,6 @@ function sendToSheet(sheetName, rowData){
     }).then(function(){ return true; }).catch(function(e){ console.error(e); return false; });
 }
 
-// === REGISTER KE BACKEND ===
 function registerToBackend(userData, passwordHash) {
     return fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
@@ -745,7 +732,6 @@ function registerToBackend(userData, passwordHash) {
     }).then(function(r) { return r.json(); });
 }
 
-// === LOGIN KE BACKEND (FLEKSIBEL: Email / No HP / Nama) ===
 function loginToBackend(identifier, passwordHash) {
     return fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
