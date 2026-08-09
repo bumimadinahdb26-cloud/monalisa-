@@ -539,6 +539,10 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 <div class="input-group"><label>Lokasi CVC/CDL</label><select class="input-field" id="cvcLokasi"><option value="">-- Pilih --</option><option value="Leher Kiri (IJV Kiri)">Leher Kiri (IJV Kiri)</option><option value="Leher Kanan (IJV Kanan)">Leher Kanan (IJV Kanan)</option><option value="Dada Kiri (Subclavia Kiri)">Dada Kiri (Subclavia Kiri)</option><option value="Dada Kanan (Subclavia Kanan)">Dada Kanan (Subclavia Kanan)</option><option value="Groin Kiri (Femoralis Kiri)">Groin Kiri (Femoralis Kiri)</option><option value="Groin Kanan (Femoralis Kanan)">Groin Kanan (Femoralis Kanan)</option></select></div>
 <div class="input-group"><label>Tanggal Pemeriksaan</label><input type="date" class="input-field" id="cvcTanggal"></div>
 </div>
+<div class="grid-2">
+<div class="input-group"><label>Lama Pemasangan</label><input type="text" class="input-field" id="cvcLama" placeholder="Contoh: 7 hari, 1 bulan"></div>
+<div class="input-group"><label>Pemasangan Ke-</label><input type="number" class="input-field" id="cvcKe" min="1" placeholder="Contoh: 1, 2, 3"></div>
+</div>
 <div class="section-title-sm">Pemeriksaan Kondisi Baik (centang yang sesuai)</div>
 <div class="sub-section-box">
 <label class="check-label good-opt"><input type="checkbox" class="cvc-good-check" data-label="Balutan kering, bersih, dan menempel rapat"><div class="check-box"></div><span>Balutan kering, bersih, dan menempel rapat</span></label>
@@ -1067,10 +1071,12 @@ function buildWaMessage(assessment, nurseName){
 
 function collectCvcData(){
     var lokasi=$('cvcLokasi').value;
+    var lama=$('cvcLama').value.trim();
+    var keBerapa=$('cvcKe').value.trim();
     var goodItems=[],badItems=[];
     document.querySelectorAll('.cvc-good-check:checked').forEach(function(cb){goodItems.push(cb.dataset.label);});
     document.querySelectorAll('.cvc-bad-check:checked').forEach(function(cb){badItems.push(cb.dataset.label);});
-    return {lokasi:lokasi,tanggal:$('cvcTanggal').value||new Date().toISOString().split('T')[0],kondisiBaik:goodItems,keluhan:badItems,catatan:$('cvcCatatan').value.trim()};
+    return {lokasi:lokasi,tanggal:$('cvcTanggal').value||new Date().toISOString().split('T')[0],lamaPasang:lama,keBerapa:keBerapa,kondisiBaik:goodItems,keluhan:badItems,catatan:$('cvcCatatan').value.trim()};
 }
 function calculateCvcAssessment(data){
     var goodScores = {'Balutan kering, bersih, dan menempel rapat':2,'Tidak ada bengkak di area insersi':2,'Tidak ada kemerahan di kulit sekitar':2,'Tidak ada nyeri saat disentuh':2,'Tidak ada bau busuk':1,'Aliran darah lancar saat cuci darah':2};
@@ -1088,7 +1094,7 @@ function calculateCvcAssessment(data){
 }
 function buildWaMessageCVC(data, nurseName, result){
     var u = appData.user;
-    var msg = '*LAPORAN SKRINING CVC/CDL*\nVia Monalisa+ v3.0\n═══════════════════════\n👤 Perawat: ' + nurseName + '\n📅 Tanggal: ' + data.tanggal + '\n═══════════════════════\n*🎯 PENILAIAN: ' + result.level + '*\nSkor: ' + result.score + '/' + result.maxScore + ' (' + result.percent + '%)\n═══════════════════════\n*📋 DATA PENGGUNA:*\nNama: ' + u.nama + '\nNo. RM: ' + u.rm + '\n═══════════════════════\n*🏥 Detail CVC:*\nLokasi: ' + data.lokasi + '\n═══════════════════════\n';
+    var msg = '*LAPORAN SKRINING CVC/CDL*\nVia Monalisa+ v3.0\n═══════════════════════\n👤 Perawat: ' + nurseName + '\n📅 Tanggal: ' + data.tanggal + '\n═══════════════════════\n*🎯 PENILAIAN: ' + result.level + '*\nSkor: ' + result.score + '/' + result.maxScore + ' (' + result.percent + '%)\n═══════════════════════\n*📋 DATA PENGGUNA:*\nNama: ' + u.nama + '\nNo. RM: ' + u.rm + '\n═══════════════════════\n*🏥 Detail CVC:*\nLokasi: ' + data.lokasi + '\nLama Pemasangan: ' + (data.lamaPasang||'-') + '\nPemasangan Ke-: ' + (data.keBerapa||'-') + '\n═══════════════════════\n';
     if(data.kondisiBaik.length > 0){msg += '*✅ Kondisi Baik (' + data.kondisiBaik.length + '):*\n';data.kondisiBaik.forEach(function(item, i){ msg += '   ' + (i+1) + '. ' + item + '\n'; });}
     if(data.keluhan.length > 0){msg += '\n*⚠️ KELUHAN (' + data.keluhan.length + '):*\n';data.keluhan.forEach(function(item, i){ msg += '   ' + (i+1) + '. ' + item + '\n'; });} else {msg += '*✅ Tidak ada keluhan*\n';}
     if(data.catatan){msg += '\n*📝 Catatan:*\n' + data.catatan + '\n';}
@@ -1120,9 +1126,9 @@ function buildWaMessageCVC(data, nurseName, result){
     var result=window.cvcResult||calculateCvcAssessment(data);
     var u=appData.user, now=new Date();
     appData.stats.sessions++; $('statSessions').textContent=appData.stats.sessions; saveData();
-    sendToSheet('CVC_Assessment',[now.toISOString(),u.nama,u.rm,data.lokasi,data.tanggal,data.kondisiBaik.join('; '),data.keluhan.join('; '),data.catatan,result.level]);
+    sendToSheet('CVC_Assessment',[now.toISOString(),u.nama,u.rm,data.lokasi,data.tanggal,data.lamaPasang,data.keBerapa,data.kondisiBaik.join('; '),data.keluhan.join('; '),data.catatan,result.level]);
     toast('Data CVC berhasil disimpan!','success');
-    $('cvcLokasi').value='';$('cvcTanggal').value='';$('cvcCatatan').value='';
+    $('cvcLokasi').value='';$('cvcTanggal').value='';$('cvcLama').value='';$('cvcKe').value='';$('cvcCatatan').value='';
     document.querySelectorAll('.cvc-good-check,.cvc-bad-check').forEach(function(cb){cb.checked=false;});
     $('cvcScoreDisplay').style.display='none'; window.cvcResult=null;
     setTimeout(function(){closeModal('modalCVC');},1200);
@@ -1131,7 +1137,7 @@ function buildWaMessageCVC(data, nurseName, result){
     var data=collectCvcData();
     if(!data.lokasi){toast('Pilih lokasi CVC terlebih dahulu','error');return;}
     var result=window.cvcResult||calculateCvcAssessment(data);
-    var lines=['Lokasi CVC: '+data.lokasi, 'Tanggal: '+data.tanggal, 'Penilaian: '+result.level+' ('+result.percent+'%)'];
+    var lines=['Lokasi CVC: '+data.lokasi, 'Tanggal: '+data.tanggal, 'Lama Pemasangan: '+data.lamaPasang, 'Pemasangan Ke-: '+data.keBerapa, 'Penilaian: '+result.level+' ('+result.percent+'%)'];
     if(data.kondisiBaik.length){lines.push('Kondisi Baik:');data.kondisiBaik.forEach(function(i){lines.push('- '+i);});}
     if(data.keluhan.length){lines.push('Keluhan:');data.keluhan.forEach(function(i){lines.push('- '+i);});}
     if(data.catatan){lines.push('Catatan: '+data.catatan);}
