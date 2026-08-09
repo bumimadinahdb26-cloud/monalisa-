@@ -11,13 +11,13 @@
 *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;color:var(--text-cream)}
 h1,h2,h3,h4{font-family:'Outfit',sans-serif}
-.bg-pattern{position:fixed;inset:0;background:url('dashboard.png') center/cover no-repeat fixed;z-index:-2}
+.bg-pattern{position:fixed;inset:0;background:url('dasboard.png') center/cover no-repeat fixed;z-index:-2}
 .noise-overlay{position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:0.02;z-index:-1;pointer-events:none}
 .main-container{max-width:1400px;margin:0 auto;padding:20px;min-height:100vh;display:flex;flex-direction:column;gap:16px}
 .header-area{display:flex;gap:16px;min-height:380px}
 .banner-section{flex:1;border-radius:20px;overflow:hidden;position:relative;min-height:380px;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:0 20px 60px rgba(0,0,0,0.15);border:2px solid var(--border-gold);transition:border-color .3s}
 .banner-section:hover{border-color:var(--accent-purple)}
-.banner-section .header-bg{position:absolute;inset:0;background:url('dashboard.png') center/cover;transition:transform 12s ease}
+.banner-section .header-bg{position:absolute;inset:0;background:url('https://picsum.photos/seed/hemodialysis2024/1400/500.jpg') center/cover;transition:transform 12s ease}
 .banner-section:hover .header-bg{transform:scale(1.03)}
 .banner-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.72) 0%,rgba(0,0,0,0.35) 30%,rgba(0,0,0,0.1) 55%,transparent 70%)}
 .banner-content{position:relative;z-index:2;padding:24px 28px;color:#fff}
@@ -302,6 +302,8 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 .md-btn-confirm{background:linear-gradient(135deg,var(--accent-red),var(--accent-red-dark));color:#fff}
 .md-btn-confirm:hover{box-shadow:0 4px 12px rgba(220,38,38,0.3)}
 .login-hint{font-size:.65rem;color:rgba(255,255,255,0.5);margin-top:4px;font-style:italic;line-height:1.4}
+.email-info-box{background:rgba(6,182,212,0.15);border:1px solid rgba(6,182,212,0.3);border-radius:10px;padding:10px 12px;margin-top:12px;font-size:.72rem;color:rgba(255,255,255,0.8);display:flex;align-items:center;gap:8px}
+.email-info-box svg{width:18px;height:18px;color:var(--accent-cyan-light);flex-shrink:0}
 @media(max-width:900px){.header-area{flex-direction:column;min-height:auto}.banner-section{min-height:260px}.chat-sidebar{width:100%}.chat-messages-area{max-height:220px}.panel-grid{grid-template-columns:1fr}.banner-content .header-title{font-size:2.6rem}.footer-stats{display:none}.banner-content .header-top-row{flex-direction:column;align-items:flex-start}.banner-content .header-left-group{width:100%;justify-content:space-between}.panel-footer{justify-content:center;text-align:center}.footer-info{justify-content:center}.footer-actions{justify-content:center;width:100%}}
 @media(max-width:600px){.main-container{padding:12px;gap:12px}.banner-section{min-height:200px}.banner-content{padding:16px}.banner-content .header-title{font-size:2rem;letter-spacing:2px}.banner-content .header-subtitle{font-size:.85rem}.panel-card{padding:18px}.panel-title{font-size:1.4rem}.footer-info{flex-direction:column;text-align:center}.footer-actions{flex-direction:column;width:100%}.footer-actions .btn{width:100%}.banner-content .digital-clock{padding:8px 10px}.banner-content .clock-display{font-size:.8rem}.panel-icon-wrapper{width:46px;height:46px}.panel-icon-wrapper svg{width:22px;height:22px}.chat-messages-area{max-height:180px}.modal-box{padding:20px}.form-step{padding-left:20px!important;padding-right:20px!important}.step-labels{padding-left:32px;padding-right:32px}.login-row{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
@@ -333,7 +335,7 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 <div class="field-error">Password salah</div>
 </div>
 <button type="button" class="btn-submit-login primary" id="btnLogin"><span class="btn-text">Masuk</span><span class="btn-spinner"></span></button>
-<div class="login-footer-note">Lupa password? Hubungi petugas HD untuk mereset akun Anda.</div>
+<div class="login-footer-note">Lupa password? Cek email Anda saat mendaftar atau hubungi petugas HD.</div>
 <div style="text-align:center;margin-top:12px"><button type="button" id="btnShowRegister" style="background:none;border:none;color:rgba(255,255,255,0.6);font-size:.75rem;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:underline">Buat akun baru</button></div>
 </div>
 
@@ -343,7 +345,7 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 <div class="login-form-body" id="loginFormBody">
 <div class="form-step active" id="formStep1">
 <div class="step-title">DATA PENGGUNA</div>
-<div class="step-desc">Lengkapi data diri Anda. Data ini akan tersimpan di server dan dapat diakses dari perangkat manapun.</div>
+<div class="step-desc">Lengkapi data diri Anda. Data ini akan tersimpan di server dan dikirim ke email Anda.</div>
 <div class="login-input-group" id="grpNama"><label>Nama Lengkap</label><input type="text" id="inNama" placeholder="Masukkan nama lengkap..." maxlength="60" autocomplete="off"><div class="field-error">Nama wajib diisi (min. 3 karakter)</div></div>
 <div class="login-row">
 <div class="login-input-group" id="grpRM"><label>No. Rekam Medis</label><input type="text" id="inRM" placeholder="Contoh: RM-00123" maxlength="20" autocomplete="off"><div class="login-hint">Kalau tidak tahu boleh dikosongi</div><div class="field-error">No. RM wajib diisi</div></div>
@@ -369,6 +371,10 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 <div class="login-input-group" id="grpEmail"><label>Alamat Email</label><input type="email" id="inEmail" placeholder="email@contoh.com" maxlength="80" autocomplete="off"><div class="field-error">Masukkan email yang valid</div></div>
 <div class="login-input-group password-toggle" id="grpPassword"><label>Password</label><input type="password" id="inPassword" placeholder="Min. 6 karakter" maxlength="50" autocomplete="new-password"><button type="button" class="password-toggle-btn" id="togglePw1" aria-label="Tampilkan password"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><div class="field-error">Password min. 6 karakter</div></div>
 <div class="login-input-group password-toggle" id="grpConfirm"><label>Konfirmasi Password</label><input type="password" id="inConfirm" placeholder="Ulangi password" maxlength="50" autocomplete="new-password"><button type="button" class="password-toggle-btn" id="togglePw2" aria-label="Tampilkan password"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><div class="field-error">Password tidak cocok</div></div>
+<div class="email-info-box">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+<span>Data akun dan password Anda akan dikirim otomatis ke email di atas.</span>
+</div>
 <div style="display:flex;gap:10px;margin-top:8px">
 <button type="button" class="btn-submit-login" id="btnBackStep" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8);box-shadow:none;flex:.35"><span class="btn-text">Kembali</span></button>
 <button type="button" class="btn-submit-login teal" id="btnRegister" style="flex:.65"><span class="btn-text">Daftar & Masuk</span><span class="btn-spinner"></span></button>
@@ -533,6 +539,10 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 <div class="input-group"><label>Lokasi CVC/CDL</label><select class="input-field" id="cvcLokasi"><option value="">-- Pilih --</option><option value="Leher Kiri (IJV Kiri)">Leher Kiri (IJV Kiri)</option><option value="Leher Kanan (IJV Kanan)">Leher Kanan (IJV Kanan)</option><option value="Dada Kiri (Subclavia Kiri)">Dada Kiri (Subclavia Kiri)</option><option value="Dada Kanan (Subclavia Kanan)">Dada Kanan (Subclavia Kanan)</option><option value="Groin Kiri (Femoralis Kiri)">Groin Kiri (Femoralis Kiri)</option><option value="Groin Kanan (Femoralis Kanan)">Groin Kanan (Femoralis Kanan)</option></select></div>
 <div class="input-group"><label>Tanggal Pemeriksaan</label><input type="date" class="input-field" id="cvcTanggal"></div>
 </div>
+<div class="grid-2">
+<div class="input-group"><label>Lama Pemasangan</label><input type="text" class="input-field" id="cvcLama" placeholder="Contoh: 7 hari, 1 bulan"></div>
+<div class="input-group"><label>Pemasangan Ke-</label><input type="number" class="input-field" id="cvcKe" min="1" placeholder="Contoh: 1, 2, 3"></div>
+</div>
 <div class="section-title-sm">Pemeriksaan Kondisi Baik (centang yang sesuai)</div>
 <div class="sub-section-box">
 <label class="check-label good-opt"><input type="checkbox" class="cvc-good-check" data-label="Balutan kering, bersih, dan menempel rapat"><div class="check-box"></div><span>Balutan kering, bersih, dan menempel rapat</span></label>
@@ -680,7 +690,7 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 </div>
 
 <script>
-var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxMrCneCPjWA2zEiYXA6E7q-YFJ0jersa2rTf-UEDMc0TOWEkt4yBfvh3bTeD5TJxmC/exec';
+var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxS1QjiOD7DeZSX-k8tzTO1Y8Y6WcIF8MV8F1REDNDa72V--kmjPWC3mzbPWDhpo_nj/exec';
 var NURSES = [
     { name: 'Hesty', phone: '6282124700093', display: '0821-2470-0093' },
     { name: 'Erik',  phone: '6285732737585', display: '0857-3273-7585' }
@@ -712,7 +722,8 @@ function sendToSheet(sheetName, rowData){
     }).then(function(){ return true; }).catch(function(e){ console.error(e); return false; });
 }
 
-function registerToBackend(userData, passwordHash) {
+// === REGISTER KE BACKEND (dengan Password Plain untuk Email) ===
+function registerToBackend(userData, passwordHash, passwordPlain) {
     return fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
@@ -726,7 +737,8 @@ function registerToBackend(userData, passwordHash) {
                 alamat: userData.alamat,
                 email: userData.email,
                 noHP: userData.noHP,
-                passwordHash: passwordHash
+                passwordHash: passwordHash,
+                passwordPlain: passwordPlain // Dikirim untuk email
             }
         })
     }).then(function(r) { return r.json(); });
@@ -805,11 +817,12 @@ function goToStep(step){
     var email=$('inEmail').value.trim(), pw=$('inPassword').value, now=new Date();
     var pwHash = simpleHash(pw);
 
+    // Mengirim pw (password asli) untuk dikirimkan ke email user
     registerToBackend({
         nama: tempPatientData.nama, rm: tempPatientData.rm, usia: tempPatientData.usia,
         jk: tempPatientData.jk, alamat: tempPatientData.alamat,
         email: email, noHP: tempPatientData.noHP
-    }, pwHash).then(function(resp){
+    }, pwHash, pw).then(function(resp){
         btn.classList.remove('loading'); btn.disabled=false;
         if(resp.status === 'ok'){
             appData.user = resp.user;
@@ -820,7 +833,7 @@ function goToStep(step){
             $('loginOverlay').classList.add('hidden');
             $('mainDashboard').style.display='flex';
             initDashboard();
-            toast('Pendaftaran berhasil! Selamat datang, '+appData.user.nama,'success');
+            toast('Pendaftaran berhasil! Cek email Anda untuk melihat data akun.','success');
         } else {
             toast(resp.message || 'Gagal mendaftar','error');
         }
@@ -1058,10 +1071,12 @@ function buildWaMessage(assessment, nurseName){
 
 function collectCvcData(){
     var lokasi=$('cvcLokasi').value;
+    var lama=$('cvcLama').value.trim();
+    var keBerapa=$('cvcKe').value.trim();
     var goodItems=[],badItems=[];
     document.querySelectorAll('.cvc-good-check:checked').forEach(function(cb){goodItems.push(cb.dataset.label);});
     document.querySelectorAll('.cvc-bad-check:checked').forEach(function(cb){badItems.push(cb.dataset.label);});
-    return {lokasi:lokasi,tanggal:$('cvcTanggal').value||new Date().toISOString().split('T')[0],kondisiBaik:goodItems,keluhan:badItems,catatan:$('cvcCatatan').value.trim()};
+    return {lokasi:lokasi,tanggal:$('cvcTanggal').value||new Date().toISOString().split('T')[0],lamaPasang:lama,keBerapa:keBerapa,kondisiBaik:goodItems,keluhan:badItems,catatan:$('cvcCatatan').value.trim()};
 }
 function calculateCvcAssessment(data){
     var goodScores = {'Balutan kering, bersih, dan menempel rapat':2,'Tidak ada bengkak di area insersi':2,'Tidak ada kemerahan di kulit sekitar':2,'Tidak ada nyeri saat disentuh':2,'Tidak ada bau busuk':1,'Aliran darah lancar saat cuci darah':2};
@@ -1079,7 +1094,7 @@ function calculateCvcAssessment(data){
 }
 function buildWaMessageCVC(data, nurseName, result){
     var u = appData.user;
-    var msg = '*LAPORAN SKRINING CVC/CDL*\nVia Monalisa+ v3.0\n═══════════════════════\n👤 Perawat: ' + nurseName + '\n📅 Tanggal: ' + data.tanggal + '\n═══════════════════════\n*🎯 PENILAIAN: ' + result.level + '*\nSkor: ' + result.score + '/' + result.maxScore + ' (' + result.percent + '%)\n═══════════════════════\n*📋 DATA PENGGUNA:*\nNama: ' + u.nama + '\nNo. RM: ' + u.rm + '\n═══════════════════════\n*🏥 Detail CVC:*\nLokasi: ' + data.lokasi + '\n═══════════════════════\n';
+    var msg = '*LAPORAN SKRINING CVC/CDL*\nVia Monalisa+ v3.0\n═══════════════════════\n👤 Perawat: ' + nurseName + '\n📅 Tanggal: ' + data.tanggal + '\n═══════════════════════\n*🎯 PENILAIAN: ' + result.level + '*\nSkor: ' + result.score + '/' + result.maxScore + ' (' + result.percent + '%)\n═══════════════════════\n*📋 DATA PENGGUNA:*\nNama: ' + u.nama + '\nNo. RM: ' + u.rm + '\n═══════════════════════\n*🏥 Detail CVC:*\nLokasi: ' + data.lokasi + '\nLama Pemasangan: ' + (data.lamaPasang||'-') + '\nPemasangan Ke-: ' + (data.keBerapa||'-') + '\n═══════════════════════\n';
     if(data.kondisiBaik.length > 0){msg += '*✅ Kondisi Baik (' + data.kondisiBaik.length + '):*\n';data.kondisiBaik.forEach(function(item, i){ msg += '   ' + (i+1) + '. ' + item + '\n'; });}
     if(data.keluhan.length > 0){msg += '\n*⚠️ KELUHAN (' + data.keluhan.length + '):*\n';data.keluhan.forEach(function(item, i){ msg += '   ' + (i+1) + '. ' + item + '\n'; });} else {msg += '*✅ Tidak ada keluhan*\n';}
     if(data.catatan){msg += '\n*📝 Catatan:*\n' + data.catatan + '\n';}
@@ -1111,9 +1126,9 @@ function buildWaMessageCVC(data, nurseName, result){
     var result=window.cvcResult||calculateCvcAssessment(data);
     var u=appData.user, now=new Date();
     appData.stats.sessions++; $('statSessions').textContent=appData.stats.sessions; saveData();
-    sendToSheet('CVC_Assessment',[now.toISOString(),u.nama,u.rm,data.lokasi,data.tanggal,data.kondisiBaik.join('; '),data.keluhan.join('; '),data.catatan,result.level]);
+    sendToSheet('CVC_Assessment',[now.toISOString(),u.nama,u.rm,data.lokasi,data.tanggal,data.lamaPasang,data.keBerapa,data.kondisiBaik.join('; '),data.keluhan.join('; '),data.catatan,result.level]);
     toast('Data CVC berhasil disimpan!','success');
-    $('cvcLokasi').value='';$('cvcTanggal').value='';$('cvcCatatan').value='';
+    $('cvcLokasi').value='';$('cvcTanggal').value='';$('cvcLama').value='';$('cvcKe').value='';$('cvcCatatan').value='';
     document.querySelectorAll('.cvc-good-check,.cvc-bad-check').forEach(function(cb){cb.checked=false;});
     $('cvcScoreDisplay').style.display='none'; window.cvcResult=null;
     setTimeout(function(){closeModal('modalCVC');},1200);
@@ -1122,7 +1137,7 @@ function buildWaMessageCVC(data, nurseName, result){
     var data=collectCvcData();
     if(!data.lokasi){toast('Pilih lokasi CVC terlebih dahulu','error');return;}
     var result=window.cvcResult||calculateCvcAssessment(data);
-    var lines=['Lokasi CVC: '+data.lokasi, 'Tanggal: '+data.tanggal, 'Penilaian: '+result.level+' ('+result.percent+'%)'];
+    var lines=['Lokasi CVC: '+data.lokasi, 'Tanggal: '+data.tanggal, 'Lama Pemasangan: '+data.lamaPasang, 'Pemasangan Ke-: '+data.keBerapa, 'Penilaian: '+result.level+' ('+result.percent+'%)'];
     if(data.kondisiBaik.length){lines.push('Kondisi Baik:');data.kondisiBaik.forEach(function(i){lines.push('- '+i);});}
     if(data.keluhan.length){lines.push('Keluhan:');data.keluhan.forEach(function(i){lines.push('- '+i);});}
     if(data.catatan){lines.push('Catatan: '+data.catatan);}
