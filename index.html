@@ -214,20 +214,10 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 .nurse-card:hover .nurse-arrow{transform:translateX(4px);color:#25d366}
 .login-overlay{ position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:url('banner-saya.png')center/cover no-repeat;transition:opacity .6s ease,visibility .6s ease}
 .login-overlay.hidden{opacity:0;visibility:hidden;pointer-events:none;z-index:-1}   
-.login-card{position:relative;z-index:2;width:460px;max-width:92vw;background:rgba(255,255,255,0.15);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,0.2);border-radius:24px;overflow:hidden;box-shadow:0 25px 80px rgba(0,0,0,0.3)}
+.login-card{position:relative;z-index:2;width:460px;max-width:92vw;max-height:95vh;overflow-y:auto;background:rgba(255,255,255,0.15);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,0.2);border-radius:24px;overflow-x:hidden;box-shadow:0 25px 80px rgba(0,0,0,0.3)}
 .login-card-header{padding:28px 32px 0;text-align:center}
 .login-logo{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:6px;color:#fff;background:linear-gradient(135deg,#fff 0%,var(--accent-purple-light) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
 .login-logo-sub{font-size:.78rem;color:rgba(255,255,255,0.8);margin-top:4px;letter-spacing:2px;text-transform:uppercase}
-.step-indicator{display:flex;align-items:center;justify-content:center;gap:0;padding:24px 32px 0}
-.step-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;border:2px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.6);transition:all .4s;position:relative;z-index:2;background:rgba(0,0,0,0.2)}
-.step-dot.active{border-color:var(--accent-purple);color:#fff;background:linear-gradient(135deg,var(--accent-purple),var(--accent-purple-dark));box-shadow:0 0 20px rgba(124,58,237,0.4)}
-.step-dot.done{border-color:var(--accent-teal);color:#fff;background:var(--accent-teal);box-shadow:0 0 15px rgba(20,184,166,0.3)}
-.step-line{width:60px;height:2px;background:rgba(255,255,255,0.2);transition:background .4s}
-.step-line.done{background:var(--accent-teal)}
-.step-labels{display:flex;justify-content:space-between;padding:8px 44px 0}
-.step-label{font-size:.65rem;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:1px;font-weight:600;transition:color .4s}
-.step-label.active{color:var(--accent-purple-light)}
-.step-label.done{color:var(--accent-teal)}
 .login-form-body{padding:0;position:relative}
 .form-step{position:absolute;inset:0;padding:24px 32px 32px;opacity:0;visibility:hidden;transform:translateX(30px);transition:all .4s ease}
 .form-step.active{opacity:1;visibility:visible;transform:translateX(0)}
@@ -305,7 +295,7 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 .email-info-box{background:rgba(6,182,212,0.15);border:1px solid rgba(6,182,212,0.3);border-radius:10px;padding:10px 12px;margin-top:12px;font-size:.72rem;color:rgba(255,255,255,0.8);display:flex;align-items:center;gap:8px}
 .email-info-box svg{width:18px;height:18px;color:var(--accent-cyan-light);flex-shrink:0}
 @media(max-width:900px){.header-area{flex-direction:column;min-height:auto}.banner-section{min-height:260px}.chat-sidebar{width:100%}.chat-messages-area{max-height:220px}.panel-grid{grid-template-columns:1fr}.banner-content .header-title{font-size:2.6rem}.footer-stats{display:none}.banner-content .header-top-row{flex-direction:column;align-items:flex-start}.banner-content .header-left-group{width:100%;justify-content:space-between}.panel-footer{justify-content:center;text-align:center}.footer-info{justify-content:center}.footer-actions{justify-content:center;width:100%}}
-@media(max-width:600px){.main-container{padding:12px;gap:12px}.banner-section{min-height:200px}.banner-content{padding:16px}.banner-content .header-title{font-size:2rem;letter-spacing:2px}.banner-content .header-subtitle{font-size:.85rem}.panel-card{padding:18px}.panel-title{font-size:1.4rem}.footer-info{flex-direction:column;text-align:center}.footer-actions{flex-direction:column;width:100%}.footer-actions .btn{width:100%}.banner-content .digital-clock{padding:8px 10px}.banner-content .clock-display{font-size:.8rem}.panel-icon-wrapper{width:46px;height:46px}.panel-icon-wrapper svg{width:22px;height:22px}.chat-messages-area{max-height:180px}.modal-box{padding:20px}.form-step{padding-left:20px!important;padding-right:20px!important}.step-labels{padding-left:32px;padding-right:32px}.login-row{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}}
+@media(max-width:600px){.main-container{padding:12px;gap:12px}.banner-section{min-height:200px}.banner-content{padding:16px}.banner-content .header-title{font-size:2rem;letter-spacing:2px}.banner-content .header-subtitle{font-size:.85rem}.panel-card{padding:18px}.panel-title{font-size:1.4rem}.footer-info{flex-direction:column;text-align:center}.footer-actions{flex-direction:column;width:100%}.footer-actions .btn{width:100%}.banner-content .digital-clock{padding:8px 10px}.banner-content .clock-display{font-size:.8rem}.panel-icon-wrapper{width:46px;height:46px}.panel-icon-wrapper svg{width:22px;height:22px}.chat-messages-area{max-height:180px}.modal-box{padding:20px}.form-step{padding-left:20px!important;padding-right:20px!important}.login-row{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -339,9 +329,7 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 <div style="text-align:center;margin-top:12px"><button type="button" id="btnShowRegister" style="background:none;border:none;color:rgba(255,255,255,0.6);font-size:.75rem;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:underline">Buat akun baru</button></div>
 </div>
 
-<div id="registerView">
-<div class="step-indicator"><div class="step-dot active" id="stepDot1">1</div><div class="step-line" id="stepLine"></div><div class="step-dot" id="stepDot2">2</div></div>
-<div class="step-labels"><span class="step-label active" id="stepLabel1">DATA PENGGUNA</span><span class="step-label" id="stepLabel2">Buat Akun</span></div>
+<div id="registerView" style="padding:32px 32px 0">
 <div class="login-form-body" id="loginFormBody">
 <div class="form-step active" id="formStep1">
 <div class="step-title">DATA PENGGUNA</div>
@@ -355,8 +343,7 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 <div class="login-input-group" id="grpJK"><label>Jenis Kelamin</label><select id="inJK"><option value="">-- Pilih --</option><option value="Laki-laki">Laki-laki</option><option value="Perempuan">Perempuan</option></select><div class="field-error">Pilih jenis kelamin</div></div>
 <div class="login-input-group" id="grpAlamat"><label>Alamat</label><input type="text" id="inAlamat" placeholder="Alamat tempat tinggal..." maxlength="150" autocomplete="off"><div class="field-error">Alamat wajib diisi</div></div>
 <button type="button" class="btn-submit-login primary" id="btnNextStep"><span class="btn-text">Lanjutkan ke Pembuatan Akun</span><span class="btn-spinner"></span></button>
-<div class="login-footer-note">Data tersimpan di server spreadsheet monitoring.</div>
-<div style="text-align:center;margin-top:10px"><button type="button" id="btnShowLogin" style="background:none;border:none;color:rgba(255,255,255,0.6);font-size:.72rem;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:underline">Sudah punya akun? Klik akun saya</button></div>
+<button type="button" class="btn-submit-login" id="btnShowLogin" style="background:rgba(255,255,255,0.15);color:#fff;box-shadow:none;margin-top:10px;border:1.5px solid rgba(255,255,255,0.2);"><span class="btn-text">Sudah punya akun? Klik di sini</span></button>
 </div>
 <div class="form-step" id="formStep2">
 <div class="step-title">Buat Akun</div>
@@ -791,19 +778,15 @@ function validateStep2(){
     return valid;
 }
 function goToStep(step){
-    var s1=$('formStep1'),s2=$('formStep2'),d1=$('stepDot1'),d2=$('stepDot2'),l1=$('stepLabel1'),l2=$('stepLabel2'),line=$('stepLine');
+    var s1=$('formStep1'),s2=$('formStep2');
     if(step===2){
         s1.classList.remove('active');s1.classList.add('exit-left');s2.classList.add('active');
-        d1.classList.remove('active');d1.classList.add('done');d2.classList.add('active');line.classList.add('done');
-        l1.classList.remove('active');l1.classList.add('done');l2.classList.add('active');
         $('dataSummary').style.display='block'; $('sumNama').textContent=tempPatientData.nama;
         $('sumRM').textContent=tempPatientData.rm; $('sumUsia').textContent=tempPatientData.usia+' tahun';
         $('sumNoHP').textContent=tempPatientData.noHP;
         loginStep=2;
     } else {
-        s2.classList.remove('active');s1.classList.remove('exit-left');s1.classList.add('active');
-        d2.classList.remove('active');d1.classList.remove('done');d1.classList.add('active');
-        line.classList.remove('done');l2.classList.remove('active');l1.classList.remove('done');l1.classList.add('active'); loginStep=1;
+        s2.classList.remove('active');s1.classList.remove('exit-left');s1.classList.add('active'); loginStep=1;
     }
     $('loginFormBody').style.minHeight=(step===2?s2:s1).scrollHeight+'px';
 }
